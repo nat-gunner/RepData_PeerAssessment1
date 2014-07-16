@@ -237,7 +237,9 @@ library(reshape2)
 
 comSum2 <- melt(comSum, id.vars=c("x", "row.names"))
 
-hist(comSum2$value, main="Total # of Steps", xlab="Number of daily steps")
+## Create a histogram
+
+hist(comSum2$value, main="Total # of Steps - no NAs", xlab="Number of daily steps")
 ```
 
 ![plot of chunk replace_NA](figure/replace_NA.png) 
@@ -262,9 +264,13 @@ print(median(comSum2$value))
 ## [1] 10766
 ```
 
+With the missing data set to the average number of steps for the corresponding interval, the mean and median have not changed significantly.
+
 ## Comparing weekends and weekdays
 
-This final chunk of code will create a new factor variable in the activity data set with two levels: "weekend" and "weekday".  It will then evaluate the dates in the data set to determine whether a date is a weekend or a weekday
+This final chunk of code will create a new factor variable in the activity data set with two levels: "weekend" and "weekday".  It will then evaluate the dates in the data set to determine whether a date is a weekend or a weekday.
+
+Once that is complete, it will then create new data sets for the weekend and weekday data, find the average number of steps taken during each time interval on weekend and weekday dates, then plot the data for easy comparison
 
 
 ```r
