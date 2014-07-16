@@ -106,7 +106,7 @@ stepSum2 <- melt(stepSum, id.vars=c("x", "row.names"))
 
 ## Make a histogram of the number of daily steps
 
-hist(stepSum2$value, main="Step Histogram", xlab="Number of daily steps")
+hist(stepSum2$value, main="Total # of Steps", xlab="Number of daily steps")
 
 ## Use describe() function to get some summary statistics
 
@@ -181,7 +181,27 @@ for (i in int) {
 
 activity$steps[is.na(activity$steps)] <- val
 
+## Get the total number of steps taken for each day
+
+comSum <- tapply(activity$steps,format(activity$date, '%Y-%m-%d'),sum)
+
+library(reshape2)
+
+comSum2 <- melt(comSum, id.vars=c("x", "row.names"))
+
+hist(comSum2$value, main="Total # of Steps", xlab="Number of daily steps")
+
+## Print the mean
+
+print(mean(comSum2$value))
+
+## Print the median
+
+print(median(comSum2$value))
+
 ```
+
+With the missing data set to the average number of steps for the corresponding interval, the mean and median have not changed significantly.
 
 ## Comparing weekends and weekdays
 

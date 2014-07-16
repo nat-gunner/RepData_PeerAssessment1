@@ -125,7 +125,7 @@ stepSum2 <- melt(stepSum, id.vars=c("x", "row.names"))
 
 ## Make a histogram of the number of daily steps
 
-hist(stepSum2$value, main="Step Histogram", xlab="Number of daily steps")
+hist(stepSum2$value, main="Total # of Steps", xlab="Number of daily steps")
 ```
 
 ![plot of chunk daily_sum](figure/daily_sum.png) 
@@ -228,6 +228,38 @@ for (i in int) {
 ## Replace the NAs with the average step values
 
 activity$steps[is.na(activity$steps)] <- val
+
+## Get the total number of steps taken for each day
+
+comSum <- tapply(activity$steps,format(activity$date, '%Y-%m-%d'),sum)
+
+library(reshape2)
+
+comSum2 <- melt(comSum, id.vars=c("x", "row.names"))
+
+hist(comSum2$value, main="Total # of Steps", xlab="Number of daily steps")
+```
+
+![plot of chunk replace_NA](figure/replace_NA.png) 
+
+```r
+## Print the mean
+
+print(mean(comSum2$value))
+```
+
+```
+## [1] 10766
+```
+
+```r
+## Print the median
+
+print(median(comSum2$value))
+```
+
+```
+## [1] 10766
 ```
 
 ## Comparing weekends and weekdays
